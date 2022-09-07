@@ -82,6 +82,16 @@ void P2PS_STM_App_Notification(P2PS_STM_App_Notification_evt_t *pNotification)
 
     case P2PS_STM_WRITE_EVT:
 /* USER CODE BEGIN P2PS_STM_WRITE_EVT */
+	if(pNotification->DataTransfered.pPayload[1] == 0x01)
+	{
+		HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_SET);
+		APP_DBG_MSG("– P2P APPLICATION SERVER : LED BLUE ON\n\r");
+	}
+	else
+	{
+		HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_RESET);
+		APP_DBG_MSG("– P2P APPLICATION SERVER : LED BLUE OFF\n\r");
+	}
 
 /* USER CODE END P2PS_STM_WRITE_EVT */
       break;
