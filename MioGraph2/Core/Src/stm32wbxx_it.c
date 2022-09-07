@@ -22,6 +22,7 @@
 #include "stm32wbxx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "app_common.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -227,5 +228,37 @@ void DMA2_Channel4_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+/**
+
+* @brief This function handles RTC wake-up interrupt through EXTI line 19.
+
+*/
+
+void RTC_WKUP_IRQHandler(void)
+{
+	HW_TS_RTC_Wakeup_Handler();
+}
+
+/**
+
+* @brief This function handles IPCC RX occupied interrupt.
+
+*/
+
+void IPCC_C1_RX_IRQHandler(void)
+{
+	HW_IPCC_Rx_Handler();
+}
+
+/**
+
+* @brief This function handles IPCC TX free interrupt.
+
+*/
+
+void IPCC_C1_TX_IRQHandler(void)
+{
+	HW_IPCC_Tx_Handler();
+}
 
 /* USER CODE END 1 */

@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stm32_seq.h"
 
 /* USER CODE END Includes */
 
@@ -121,7 +122,7 @@ int main(void)
   HAL_UART_Transmit_DMA(&huart1, str, sizeof(str));
   while (1)
   {
-	  HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+	  HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
 
 	  HAL_Delay(100);
     /* USER CODE END WHILE */
@@ -393,7 +394,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LD2_Pin|LD3_Pin|LD1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, LED_G_Pin|LED_R_Pin|LED_B_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -401,8 +402,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD2_Pin LD3_Pin LD1_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin|LD3_Pin|LD1_Pin;
+  /*Configure GPIO pins : LED_G_Pin LED_R_Pin LED_B_Pin */
+  GPIO_InitStruct.Pin = LED_G_Pin|LED_R_Pin|LED_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
