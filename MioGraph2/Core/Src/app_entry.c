@@ -158,7 +158,18 @@ void Init_Exti(void)
 }
 
 /* USER CODE BEGIN FD */
-
+void HAL_GPIO_EXTI_Callback( uint16_t GPIO_Pin )
+ {
+	switch (GPIO_Pin)
+	{
+		case SW1_Pin:
+			APP_DBG_MSG("-- INTERRUPT: SW1 PUSHED\n\r");
+			break;
+		default:
+			break;
+	}
+	return;
+}
 /* USER CODE END FD */
 
 /*************************************************************
