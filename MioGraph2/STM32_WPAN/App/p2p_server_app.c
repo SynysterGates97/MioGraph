@@ -53,7 +53,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
-
+static void P2PS_Send_Notification( void );
 /* USER CODE END PFP */
 
 /* Functions Definition ------------------------------------------------------*/
@@ -145,12 +145,22 @@ void P2PS_APP_Notification(P2PS_APP_ConnHandle_Not_evt_t *pNotification)
 void P2PS_APP_Init(void)
 {
 /* USER CODE BEGIN P2PS_APP_Init */
-
+	UTIL_SEQ_RegTask( 1 << CFG_TASK_SW1_BUTTON_PUSHED_ID, UTIL_SEQ_RFU,
+	P2PS_Send_Notification );
 /* USER CODE END P2PS_APP_Init */
   return;
 }
 
 /* USER CODE BEGIN FD */
+void P2PS_Send_Notification(void)
+{
+	APP_DBG_MSG("– P2P APPLICATION SERVER  : INFORM CLIENT BUTTON 1 PUSHED \n\r");
+	static uint32_t sendCounter;
+	P2PS_STM_App_Update_Char(P2P_NOTIFY_CHAR_UUID, &sendCounter);
+	sendCounter++;
+
+	return;
+}
 
 /* USER CODE END FD */
 
