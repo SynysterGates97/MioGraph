@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    App/app_ble.h
+  * @file    App/custom_stm.h
   * @author  MCD Application Team
-  * @brief   Header for ble application
+  * @brief   Header for custom_stm.c module.
   ******************************************************************************
   * @attention
   *
@@ -19,39 +19,54 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef APP_BLE_H
-#define APP_BLE_H
+#ifndef __CUSTOM_STM_H
+#define __CUSTOM_STM_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "hci_tl.h"
-
-/* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
+typedef enum
+{
+  /* BULKA */
+  CUSTOM_STM_CHARSHORTNAME,
+} Custom_STM_Char_Opcode_t;
 
 typedef enum
 {
-  APP_BLE_IDLE,
-  APP_BLE_FAST_ADV,
-  APP_BLE_LP_ADV,
-  APP_BLE_SCAN,
-  APP_BLE_LP_CONNECTING,
-  APP_BLE_CONNECTED_SERVER,
-  APP_BLE_CONNECTED_CLIENT
-} APP_BLE_ConnStatus_t;
+  /* CharNAME */
+  CUSTOM_STM_CHARSHORTNAME_READ_EVT,
+
+  CUSTOM_STM_BOOT_REQUEST_EVT
+} Custom_STM_Opcode_evt_t;
+
+typedef struct
+{
+  uint8_t * pPayload;
+  uint8_t   Length;
+} Custom_STM_Data_t;
+
+typedef struct
+{
+  Custom_STM_Opcode_evt_t       Custom_Evt_Opcode;
+  Custom_STM_Data_t             DataTransfered;
+  uint16_t                      ConnectionHandle;
+  uint8_t                       ServiceInstance;
+} Custom_STM_App_Notification_evt_t;
 
 /* USER CODE BEGIN ET */
 
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
+extern uint8_t SizeCharshortname;
+
 /* USER CODE BEGIN EC */
 
 /* USER CODE END EC */
@@ -61,14 +76,15 @@ typedef enum
 
 /* USER CODE END EV */
 
-/* Exported macro ------------------------------------------------------------*/
+/* Exported macros -----------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 
 /* USER CODE END EM */
 
-/* Exported functions ---------------------------------------------*/
-void APP_BLE_Init(void);
-
+/* Exported functions ------------------------------------------------------- */
+void SVCCTL_InitCustomSvc(void);
+void Custom_STM_App_Notification(Custom_STM_App_Notification_evt_t *pNotification);
+tBleStatus Custom_STM_App_Update_Char(Custom_STM_Char_Opcode_t CharOpcode,  uint8_t *pPayload);
 /* USER CODE BEGIN EF */
 
 /* USER CODE END EF */
@@ -77,4 +93,4 @@ void APP_BLE_Init(void);
 }
 #endif
 
-#endif /*APP_BLE_H */
+#endif /*__CUSTOM_STM_H */
