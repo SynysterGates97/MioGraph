@@ -70,6 +70,7 @@ typedef enum
 void APP_BLE_Init(void);
 
 /* USER CODE BEGIN EF */
+void APP_BLE_Data_from_adc_update_ACTION(uint8_t channelNumber);
 
 /* USER CODE END EF */
 

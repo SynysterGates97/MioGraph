@@ -164,7 +164,8 @@ void HAL_GPIO_EXTI_Callback( uint16_t GPIO_Pin )
 	{
 		case SW1_Pin:
 			APP_DBG_MSG("-- INTERRUPT: SW1 PUSHED\n\r");
-			UTIL_SEQ_SetTask( 1<<CFG_TASK_SW1_BUTTON_PUSHED_ID, CFG_SCH_PRIO_0);
+			APP_BLE_Data_from_adc_update_ACTION(1);
+			APP_BLE_Data_from_adc_update_ACTION(2);
 			break;
 		default:
 			break;

@@ -1170,6 +1170,10 @@ static void Connection_Interval_Update_Req(void)
 #endif /* L2CAP_REQUEST_NEW_CONN_PARAM != 0 */
 
 /* USER CODE BEGIN FD_SPECIFIC_FUNCTIONS */
+void APP_BLE_Data_from_adc_update_ACTION(uint8_t channelNumber)
+{
+	P2PS_APP_Data_from_adc_update_Action(channelNumber);
+}
 
 /* USER CODE END FD_SPECIFIC_FUNCTIONS */
 /*************************************************************

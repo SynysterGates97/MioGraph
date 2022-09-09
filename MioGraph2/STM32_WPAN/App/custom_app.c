@@ -40,7 +40,8 @@ typedef struct
   /* Channel2 */
   uint8_t               Data2_Notification_Status;
   /* USER CODE BEGIN CUSTOM_APP_Context_t */
-
+  uint8_t data1[128];
+  uint8_t data2[128];
   /* USER CODE END CUSTOM_APP_Context_t */
 
   uint16_t              ConnectionHandle;
@@ -198,7 +199,8 @@ void Custom_APP_Notification(Custom_App_ConnHandle_Not_evt_t *pNotification)
 void Custom_APP_Init(void)
 {
   /* USER CODE BEGIN CUSTOM_APP_Init */
-
+	UTIL_SEQ_RegTask(1<< CFG_CHANNEL_1_DATA_UPDATED_ID, UTIL_SEQ_RFU, Custom_Data1_Send_Notification);
+	UTIL_SEQ_RegTask(1<< CFG_CHANNEL_2_DATA_UPDATED_ID, UTIL_SEQ_RFU, Custom_Data2_Send_Notification);
   /* USER CODE END CUSTOM_APP_Init */
   return;
 }
@@ -238,7 +240,15 @@ void Custom_Data1_Send_Notification(void) /* Property Notification */
   uint8_t updateflag = 0;
 
   /* USER CODE BEGIN Data1_NS_1*/
+  updateflag = TRUE;
+  static uint8_t counterValue = 0;
+  for (int i= 0; i < 128; ++i)
+  {
+	  Custom_App_Context.data1[i] = counterValue;
+  }
+  counterValue++;
 
+  memcpy(NotifyCharData, Custom_App_Context.data1, 128);
   /* USER CODE END Data1_NS_1*/
 
   if (updateflag != 0)
@@ -259,7 +269,6 @@ void Custom_Data2_Update_Char(void) /* Property Read */
   uint8_t updateflag = 0;
 
   /* USER CODE BEGIN Data2_UC_1*/
-
   /* USER CODE END Data2_UC_1*/
 
   if (updateflag != 0)
@@ -278,7 +287,15 @@ void Custom_Data2_Send_Notification(void) /* Property Notification */
   uint8_t updateflag = 0;
 
   /* USER CODE BEGIN Data2_NS_1*/
+  updateflag = TRUE;
+  static uint8_t counterValue = 0;
+  for (int i= 0; i < 128; ++i)
+  {
+	  Custom_App_Context.data2[i] = counterValue;
+  }
+  counterValue++;
 
+  memcpy(NotifyCharData, Custom_App_Context.data2, 128);
   /* USER CODE END Data2_NS_1*/
 
   if (updateflag != 0)
@@ -294,5 +311,9 @@ void Custom_Data2_Send_Notification(void) /* Property Notification */
 }
 
 /* USER CODE BEGIN FD_LOCAL_FUNCTIONS*/
-
+void P2PS_APP_Data_from_adc_update_Action(uint8_t channelNumber)
+{
+    UTIL_SEQ_SetTask(1<<CFG_CHANNEL_1_DATA_UPDATED_ID, CFG_SCH_PRIO_0);
+    UTIL_SEQ_SetTask(1<<CFG_CHANNEL_2_DATA_UPDATED_ID, CFG_SCH_PRIO_0);
+}
 /* USER CODE END FD_LOCAL_FUNCTIONS*/
