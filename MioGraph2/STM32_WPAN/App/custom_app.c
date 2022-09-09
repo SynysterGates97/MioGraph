@@ -35,7 +35,10 @@
 /* Private typedef -----------------------------------------------------------*/
 typedef struct
 {
-  /* BULKA */
+  /* Channel1 */
+  uint8_t               Data1_Notification_Status;
+  /* Channel2 */
+  uint8_t               Data2_Notification_Status;
   /* USER CODE BEGIN CUSTOM_APP_Context_t */
 
   /* USER CODE END CUSTOM_APP_Context_t */
@@ -76,7 +79,12 @@ uint8_t NotifyCharData[247];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-/* BULKA */
+/* Channel1 */
+static void Custom_Data1_Update_Char(void);
+static void Custom_Data1_Send_Notification(void);
+/* Channel2 */
+static void Custom_Data2_Update_Char(void);
+static void Custom_Data2_Send_Notification(void);
 
 /* USER CODE BEGIN PFP */
 
@@ -94,11 +102,48 @@ void Custom_STM_App_Notification(Custom_STM_App_Notification_evt_t *pNotificatio
 
     /* USER CODE END CUSTOM_STM_App_Notification_Custom_Evt_Opcode */
 
-    /* BULKA */
-    case CUSTOM_STM_CHARSHORTNAME_READ_EVT:
-      /* USER CODE BEGIN CUSTOM_STM_CHARSHORTNAME_READ_EVT */
+    /* Channel1 */
+    case CUSTOM_STM_DATA1_READ_EVT:
+      /* USER CODE BEGIN CUSTOM_STM_DATA1_READ_EVT */
 
-      /* USER CODE END CUSTOM_STM_CHARSHORTNAME_READ_EVT */
+      /* USER CODE END CUSTOM_STM_DATA1_READ_EVT */
+      break;
+
+    case CUSTOM_STM_DATA1_WRITE_NO_RESP_EVT:
+      /* USER CODE BEGIN CUSTOM_STM_DATA1_WRITE_NO_RESP_EVT */
+
+      /* USER CODE END CUSTOM_STM_DATA1_WRITE_NO_RESP_EVT */
+      break;
+
+    case CUSTOM_STM_DATA1_NOTIFY_ENABLED_EVT:
+      /* USER CODE BEGIN CUSTOM_STM_DATA1_NOTIFY_ENABLED_EVT */
+
+      /* USER CODE END CUSTOM_STM_DATA1_NOTIFY_ENABLED_EVT */
+      break;
+
+    case CUSTOM_STM_DATA1_NOTIFY_DISABLED_EVT:
+      /* USER CODE BEGIN CUSTOM_STM_DATA1_NOTIFY_DISABLED_EVT */
+
+      /* USER CODE END CUSTOM_STM_DATA1_NOTIFY_DISABLED_EVT */
+      break;
+
+    /* Channel2 */
+    case CUSTOM_STM_DATA2_READ_EVT:
+      /* USER CODE BEGIN CUSTOM_STM_DATA2_READ_EVT */
+
+      /* USER CODE END CUSTOM_STM_DATA2_READ_EVT */
+      break;
+
+    case CUSTOM_STM_DATA2_NOTIFY_ENABLED_EVT:
+      /* USER CODE BEGIN CUSTOM_STM_DATA2_NOTIFY_ENABLED_EVT */
+
+      /* USER CODE END CUSTOM_STM_DATA2_NOTIFY_ENABLED_EVT */
+      break;
+
+    case CUSTOM_STM_DATA2_NOTIFY_DISABLED_EVT:
+      /* USER CODE BEGIN CUSTOM_STM_DATA2_NOTIFY_DISABLED_EVT */
+
+      /* USER CODE END CUSTOM_STM_DATA2_NOTIFY_DISABLED_EVT */
       break;
 
     default:
@@ -168,7 +213,85 @@ void Custom_APP_Init(void)
  *
  *************************************************************/
 
-/* BULKA */
+/* Channel1 */
+void Custom_Data1_Update_Char(void) /* Property Read */
+{
+  uint8_t updateflag = 0;
+
+  /* USER CODE BEGIN Data1_UC_1*/
+
+  /* USER CODE END Data1_UC_1*/
+
+  if (updateflag != 0)
+  {
+    Custom_STM_App_Update_Char(CUSTOM_STM_DATA1, (uint8_t *)UpdateCharData);
+  }
+
+  /* USER CODE BEGIN Data1_UC_Last*/
+
+  /* USER CODE END Data1_UC_Last*/
+  return;
+}
+
+void Custom_Data1_Send_Notification(void) /* Property Notification */
+{
+  uint8_t updateflag = 0;
+
+  /* USER CODE BEGIN Data1_NS_1*/
+
+  /* USER CODE END Data1_NS_1*/
+
+  if (updateflag != 0)
+  {
+    Custom_STM_App_Update_Char(CUSTOM_STM_DATA1, (uint8_t *)NotifyCharData);
+  }
+
+  /* USER CODE BEGIN Data1_NS_Last*/
+
+  /* USER CODE END Data1_NS_Last*/
+
+  return;
+}
+
+/* Channel2 */
+void Custom_Data2_Update_Char(void) /* Property Read */
+{
+  uint8_t updateflag = 0;
+
+  /* USER CODE BEGIN Data2_UC_1*/
+
+  /* USER CODE END Data2_UC_1*/
+
+  if (updateflag != 0)
+  {
+    Custom_STM_App_Update_Char(CUSTOM_STM_DATA2, (uint8_t *)UpdateCharData);
+  }
+
+  /* USER CODE BEGIN Data2_UC_Last*/
+
+  /* USER CODE END Data2_UC_Last*/
+  return;
+}
+
+void Custom_Data2_Send_Notification(void) /* Property Notification */
+{
+  uint8_t updateflag = 0;
+
+  /* USER CODE BEGIN Data2_NS_1*/
+
+  /* USER CODE END Data2_NS_1*/
+
+  if (updateflag != 0)
+  {
+    Custom_STM_App_Update_Char(CUSTOM_STM_DATA2, (uint8_t *)NotifyCharData);
+  }
+
+  /* USER CODE BEGIN Data2_NS_Last*/
+
+  /* USER CODE END Data2_NS_Last*/
+
+  return;
+}
 
 /* USER CODE BEGIN FD_LOCAL_FUNCTIONS*/
 

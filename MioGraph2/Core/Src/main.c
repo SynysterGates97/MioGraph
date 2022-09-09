@@ -120,9 +120,6 @@ int main(void)
   HAL_UART_Transmit_DMA(&huart1, str, sizeof(str));
   while (1)
   {
-	  HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
-
-	  HAL_Delay(100);
     /* USER CODE END WHILE */
     MX_APPE_Process();
 

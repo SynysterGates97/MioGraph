@@ -34,14 +34,23 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 typedef enum
 {
-  /* BULKA */
-  CUSTOM_STM_CHARSHORTNAME,
+  /* Channel1 */
+  CUSTOM_STM_DATA1,
+  /* Channel2 */
+  CUSTOM_STM_DATA2,
 } Custom_STM_Char_Opcode_t;
 
 typedef enum
 {
-  /* CharNAME */
-  CUSTOM_STM_CHARSHORTNAME_READ_EVT,
+  /* Data1Array */
+  CUSTOM_STM_DATA1_READ_EVT,
+  CUSTOM_STM_DATA1_WRITE_NO_RESP_EVT,
+  CUSTOM_STM_DATA1_NOTIFY_ENABLED_EVT,
+  CUSTOM_STM_DATA1_NOTIFY_DISABLED_EVT,
+  /* Data2Array */
+  CUSTOM_STM_DATA2_READ_EVT,
+  CUSTOM_STM_DATA2_NOTIFY_ENABLED_EVT,
+  CUSTOM_STM_DATA2_NOTIFY_DISABLED_EVT,
 
   CUSTOM_STM_BOOT_REQUEST_EVT
 } Custom_STM_Opcode_evt_t;
@@ -65,7 +74,8 @@ typedef struct
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
-extern uint8_t SizeCharshortname;
+extern uint8_t SizeData1;
+extern uint8_t SizeData2;
 
 /* USER CODE BEGIN EC */
 
