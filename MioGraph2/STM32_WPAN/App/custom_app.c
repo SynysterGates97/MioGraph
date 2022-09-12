@@ -288,7 +288,7 @@ void Custom_Data2_Send_Notification(void) /* Property Notification */
 
   /* USER CODE BEGIN Data2_NS_1*/
   updateflag = TRUE;
-  static uint8_t counterValue = 0;
+  static uint8_t counterValue = 50;
   for (int i= 0; i < 128; ++i)
   {
 	  Custom_App_Context.data2[i] = counterValue;
